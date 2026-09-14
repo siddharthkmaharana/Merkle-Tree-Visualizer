@@ -6,7 +6,7 @@ import { Input } from '../ui/input';
 
 export default function DataInput({ blocks, setBlocks, tamperMode, isDark }) {
   const addBlock = () => {
-    setBlocks([...blocks, { id: Date.now(), value: `Tx${blocks.length + 1}` }]);
+    setBlocks([...blocks, { id: Date.now(), value: `Ledger Entry ${blocks.length + 1}` }]);
   };
 
   const removeBlock = (id) => {
@@ -16,7 +16,7 @@ export default function DataInput({ blocks, setBlocks, tamperMode, isDark }) {
   };
 
   const updateBlock = (id, value) => {
-    setBlocks(blocks.map(block => 
+    setBlocks(blocks.map(block =>
       block.id === id ? { ...block, value } : block
     ));
   };
@@ -46,28 +46,25 @@ export default function DataInput({ blocks, setBlocks, tamperMode, isDark }) {
               transition={{ duration: 0.2 }}
               className="relative group"
             >
-              <div className={`absolute -left-3 top-1/2 -translate-y-1/2 w-6 h-6 rounded-full border flex items-center justify-center ${
-                isDark ? 'bg-[#1a1a1a] border-gray-800' : 'bg-white border-gray-300'
-              }`}>
+              <div className={`absolute -left-3 top-1/2 -translate-y-1/2 w-6 h-6 rounded-full border flex items-center justify-center ${isDark ? 'bg-[#1a1a1a] border-gray-800' : 'bg-white border-gray-300'
+                }`}>
                 <span className={`text-[10px] font-mono ${isDark ? 'text-gray-500' : 'text-gray-600'}`}>{index}</span>
               </div>
-              
-              <div className={`relative rounded-lg border transition-all duration-300 ${
-                block.changed && tamperMode 
-                  ? 'bg-[#ff0055]/10 border-[#ff0055]/50 shadow-lg shadow-[#ff0055]/20' 
-                  : isDark 
-                    ? 'bg-[#1a1a1a] border-gray-800 hover:border-gray-700'
-                    : 'bg-white border-gray-300 hover:border-gray-400'
-              }`}>
+
+              <div className={`relative rounded-lg border transition-all duration-300 ${block.changed && tamperMode
+                ? 'bg-[#ff0055]/10 border-[#ff0055]/50 shadow-lg shadow-[#ff0055]/20'
+                : isDark
+                  ? 'bg-[#1a1a1a] border-gray-800 hover:border-gray-700'
+                  : 'bg-white border-gray-300 hover:border-gray-400'
+                }`}>
                 <Input
                   value={block.value}
                   onChange={(e) => updateBlock(block.id, e.target.value)}
-                  className={`bg-transparent border-0 font-mono text-sm focus-visible:ring-0 pr-12 ${
-                    isDark ? 'text-gray-200 placeholder:text-gray-600' : 'text-gray-900 placeholder:text-gray-400'
-                  }`}
+                  className={`bg-transparent border-0 font-mono text-sm focus-visible:ring-0 pr-12 ${isDark ? 'text-gray-200 placeholder:text-gray-600' : 'text-gray-900 placeholder:text-gray-400'
+                    }`}
                   placeholder="Enter data..."
                 />
-                
+
                 {blocks.length > 2 && (
                   <Button
                     variant="ghost"

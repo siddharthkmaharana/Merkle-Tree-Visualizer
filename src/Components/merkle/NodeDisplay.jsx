@@ -49,27 +49,27 @@ export default function NodeDisplay({ hash, label, type, isTampered, isInPath, l
           onHoverStart={() => setIsHovered(true)}
           onHoverEnd={() => setIsHovered(false)}
           className={`
-            relative px-4 py-3 rounded-lg border-2 cursor-pointer
+            relative px-2 sm:px-4 py-2 sm:py-3 rounded-lg border-2 cursor-pointer
             transition-all duration-300
             ${colors.bg} ${colors.border} ${colors.glow}
-            hover:scale-105
+            hover:scale-105 flex flex-col items-center sm:items-start w-full min-w-0
           `}
         >
           {/* Type Badge */}
-          <div className="absolute -top-2 -left-2 flex items-center gap-1 px-2 py-0.5 rounded-full bg-[#0a0a0a] border border-gray-800">
+          <div className="absolute -top-2 -left-1 sm:-left-2 flex items-center gap-1 px-1.5 sm:px-2 py-0.5 rounded-full bg-[#0a0a0a] border border-gray-800">
             {colors.icon}
-            <span className={`text-[10px] font-mono font-semibold ${colors.text}`}>
+            <span className={`text-[8px] sm:text-[10px] font-mono font-semibold ${colors.text}`}>
               {type === 'root' ? 'ROOT' : type === 'parent' ? 'PARENT' : 'LEAF'}
             </span>
           </div>
 
           {/* Label */}
           {label && (
-            <div className={`text-xs font-mono mb-1.5 ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>{label}</div>
+            <div className={`text-[10px] sm:text-xs font-mono mb-1.5 truncate w-full text-center sm:text-left ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>{label}</div>
           )}
 
           {/* Hash */}
-          <div className={`font-mono text-xs font-semibold ${colors.text} tracking-wider`}>
+          <div className={`font-mono text-[10px] sm:text-xs font-semibold ${colors.text} tracking-wider truncate w-full text-center sm:text-left`}>
             {truncateHash(hash)}
           </div>
 
