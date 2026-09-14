@@ -132,9 +132,10 @@ export default function VerificationPanel({
                 verifyIndex === i
                   ? 'bg-[#00d4ff]/20 border-[#00d4ff] text-[#00d4ff] hover:bg-[#00d4ff]/30'
                   : isDark 
-                    ? 'border-gray-700 text-gray-400 hover:border-gray-600 hover:text-gray-300'
-                    : 'border-gray-300 text-gray-700 hover:border-gray-400 hover:text-gray-900'
+                    ? 'bg-transparent border-gray-700 text-gray-400 hover:border-gray-600 hover:text-gray-300'
+                    : 'bg-white border-gray-300 text-gray-700 hover:border-gray-400 hover:bg-gray-50 hover:text-gray-900'
               }`}
+              style={!isDark && verifyIndex !== i ? { color: '#4b5563', borderColor: '#d1d5db' } : {}}
             >
               Block {i}
             </Button>

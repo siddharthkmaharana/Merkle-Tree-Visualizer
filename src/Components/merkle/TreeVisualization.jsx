@@ -79,7 +79,7 @@ export default function TreeVisualization({ blocks, tamperMode, originalHashes, 
 
     const connections = [];
     const levelHeight = 140;
-    const baseWidth = 800;
+    const baseWidth = 100;
 
     for (let levelIndex = 0; levelIndex < levels.length - 1; levelIndex++) {
       const currentLevel = levels[levelIndex];
@@ -108,9 +108,9 @@ export default function TreeVisualization({ blocks, tamperMode, originalHashes, 
           connections.push(
             <motion.line
               key={`${levelIndex}-${parentIndex}-left`}
-              x1={childX}
+              x1={`${childX}%`}
               y1={childY}
-              x2={parentX}
+              x2={`${parentX}%`}
               y2={parentY + 60}
               stroke={isTampered ? '#ff0055' : verifyIndex !== null ? '#00d4ff' : '#00ff88'}
               strokeWidth="2"
@@ -133,9 +133,9 @@ export default function TreeVisualization({ blocks, tamperMode, originalHashes, 
           connections.push(
             <motion.line
               key={`${levelIndex}-${parentIndex}-right`}
-              x1={childX}
+              x1={`${childX}%`}
               y1={childY}
-              x2={parentX}
+              x2={`${parentX}%`}
               y2={parentY + 60}
               stroke={isTampered ? '#ff0055' : verifyIndex !== null ? '#00d4ff' : '#00ff88'}
               strokeWidth="2"
@@ -164,12 +164,12 @@ export default function TreeVisualization({ blocks, tamperMode, originalHashes, 
   }
 
   const levelHeight = 140;
-  const baseWidth = 800;
+  const baseWidth = 100;
   const svgHeight = levels.length * levelHeight + 100;
 
   return (
-    <div className="relative w-full h-full overflow-auto custom-scrollbar">
-      <div className="w-[800px] mx-auto p-8">
+    <div className="relative w-full h-full flex items-center justify-center pt-8 overflow-hidden">
+      <div className="w-full max-w-4xl mx-auto px-2 sm:px-8">
         <div className="relative" style={{ height: svgHeight }}>
           <svg width="100%" height={svgHeight} className="absolute top-0 left-0 w-full h-full pointer-events-none z-0">
             {renderConnections()}
@@ -181,11 +181,11 @@ export default function TreeVisualization({ blocks, tamperMode, originalHashes, 
             return (
               <div
                 key={levelIndex}
-                className="absolute left-0 right-0 flex justify-center gap-4"
+                className="absolute left-0 right-0 flex justify-center gap-2 sm:gap-4"
                 style={{
                   top: `${y}px`,
-                  paddingLeft: `${(800 - levelWidth) / 2}px`,
-                  paddingRight: `${(800 - levelWidth) / 2}px`
+                  paddingLeft: `${(100 - levelWidth) / 2}%`,
+                  paddingRight: `${(100 - levelWidth) / 2}%`
                 }}
               >
                 {level.map((node, nodeIndex) => (
@@ -193,9 +193,9 @@ export default function TreeVisualization({ blocks, tamperMode, originalHashes, 
                     key={nodeIndex}
                     style={{
                       flex: 1,
-                      maxWidth: `${levelWidth / level.length - 20}px`
+                      minWidth: 0
                     }}
-                    className="flex justify-center"
+                    className="flex justify-center shrink"
                   >
                     <NodeDisplay
                       hash={node.hash}
